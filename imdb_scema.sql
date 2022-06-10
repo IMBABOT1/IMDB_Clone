@@ -77,10 +77,11 @@ create table images
     image_title VARCHAR(255) NOT NULL,
     filename VARCHAR(255),
     size INT,
+    movies_id BIGINT UNSIGNED NOT NULL,
     
     created_at DATETIME default now(),
     updated_at DATETIME ON UPDATE current_timestamp,
-    
+    FOREIGN KEY (movies_id) REFERENCES movies(id),
     INDEX image_imgtitle_idx (image_title)
 );
 
@@ -89,10 +90,12 @@ create table trailers
 (
 	id SERIAL PRIMARY KEY,
     trailer_name VARCHAR(255) NOT NULL,
+    movies_id BIGINT UNSIGNED NOT NULL,
+    
     
 	created_at DATETIME default now(),
     updated_at DATETIME ON UPDATE current_timestamp,
-    
+    FOREIGN KEY (movies_id) REFERENCES movies(id),
     INDEX trailers_name_idx (trailer_name)
 );
 
@@ -114,7 +117,13 @@ drop table if exists actors_photos;
 create table actors_photos
 (
 	id SERIAL PRIMARY KEY,
-    photo_id BIGINT UNSIGNED NULL
+    actors_id BIGINT UNSIGNED NULL,
+    filename VARCHAR(255),
+    
+        
+	created_at DATETIME default now(),
+    updated_at DATETIME ON UPDATE current_timestamp,
+	FOREIGN KEY (actors_id) REFERENCES actors(id) 
 );
 
 drop table if exists reviews;
