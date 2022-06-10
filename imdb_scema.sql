@@ -9,33 +9,61 @@ create table users
 	id SERIAL PRIMARY KEY, -- bigint usigned not null auto_increment unique
     firstname VARCHAR(100) NOT NULL,
     lastname VARCHAR(100) NOT NULl,
-    email varchar(100) NOT NULL UNIQUE
+    email varchar(100) NOT NULL UNIQUE,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    birth DATE,
+    
+    index users_fio_idx (firstname, lastname)
 );
 
 drop table if exists movies;
 create table movies
 (
 	id SERIAL PRIMARY KEY,
-    title VARCHAR(255) NOT NULL
+    title VARCHAR(255) NOT NULL,
+    genre VARCHAR(100) NOT NULL,
+    release_date DATE,
+    
+    index movies_title_idx (title),
+    index genre_title_idx (genre)
 );
 
 drop table if exists images;
 create table images
 (
 	id SERIAL PRIMARY KEY,
-    image_title VARCHAR(255) NOT NULL
+    image_title VARCHAR(255) NOT NULL,
+    
+    index image_imgtitle_idx (image_title)
 );
 
 drop table if exists trailers;
 create table trailers
 (
 	id SERIAL PRIMARY KEY,
-    trailer_name VARCHAR(255) NOT NULL
+    trailer_name VARCHAR(255) NOT NULL,
+    
+    index trailers_name_idx (trailer_name)
 );
 
 drop table if exists ratings;
 create table ratings
 (
 	id SERIAL PRIMARY KEY,
-	rating INT UNSIGNED NOT NULL
+	rating INT UNSIGNED NOT NULL,
+    
+    index ratings_rate_idx (rating)
+);
+
+drop table if exists actors;
+create table acters
+(
+	id SERIAL PRIMARY KEY,
+    firstname VARCHAR(100) NOT NULL,
+    lastname VARCHAR(100) NOT NULL,
+    birth DATE NOT NULL, 
+    country VARCHAR(100) NOT NULL,
+    city VARCHAR(100) NOT NULL,
+    
+    index acters_fio (firstname, lastname)
 );
