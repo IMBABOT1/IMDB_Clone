@@ -75,6 +75,11 @@ create table images
 (
 	id SERIAL PRIMARY KEY,
     image_title VARCHAR(255) NOT NULL,
+    filename VARCHAR(255),
+    size INT,
+    
+    created_at DATETIME default now(),
+    updated_at DATETIME ON UPDATE current_timestamp,
     
     INDEX image_imgtitle_idx (image_title)
 );
@@ -85,6 +90,9 @@ create table trailers
 	id SERIAL PRIMARY KEY,
     trailer_name VARCHAR(255) NOT NULL,
     
+	created_at DATETIME default now(),
+    updated_at DATETIME ON UPDATE current_timestamp,
+    
     INDEX trailers_name_idx (trailer_name)
 );
 
@@ -93,6 +101,11 @@ create table ratings
 (
 	id SERIAL PRIMARY KEY,
 	rating INT UNSIGNED NOT NULL,
+    user_id BIGINT UNSIGNED NOT NULL,
+    movies_id BIGINT UNSIGNED NOT NULL,
+    
+    FOREIGN KEY (user_id) REFERENCES users(id),
+	FOREIGN KEY (movies_id) REFERENCES movies(id),
     
     INDEX ratings_rate_idx (rating)
 );
