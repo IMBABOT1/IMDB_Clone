@@ -27,6 +27,12 @@ create table profiles
     created_ad DATETIME DEFAULT now()
 );
 
+ALTER TABLE profiles
+ADD CONSTRAINT fk_user_id
+FOREIGN KEY(user_id) REFERENCES users(id)
+ON UPDATE CASCADE
+ON DELETE RESTRICT;
+
 drop table if exists movies;
 create table movies
 (
