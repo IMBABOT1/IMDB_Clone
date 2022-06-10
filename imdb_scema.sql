@@ -16,6 +16,17 @@ create table users
     index users_fio_idx (firstname, lastname)
 );
 
+drop table if exists profiles;
+create table profiles
+(
+	user_id SERIAL PRIMARY KEY,
+    gender CHAR(1),
+    birthday DATE,
+    photo_id BIGINT UNSIGNED NULL,
+    hometown VARCHAR(100),
+    created_ad DATETIME DEFAULT now()
+);
+
 drop table if exists movies;
 create table movies
 (
@@ -56,7 +67,7 @@ create table ratings
 );
 
 drop table if exists actors;
-create table acters
+create table actors
 (
 	id SERIAL PRIMARY KEY,
     firstname VARCHAR(100) NOT NULL,
@@ -67,3 +78,10 @@ create table acters
     
     index acters_fio (firstname, lastname)
 );
+
+drop table if exists actors_photos;
+create table actors_photos
+(
+	id SERIAL PRIMARY KEY,
+    photo_id BIGINT UNSIGNED NULL
+)
