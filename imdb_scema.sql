@@ -45,6 +45,31 @@ create table movies
     INDEX genre_title_idx (genre)
 );
 
+
+drop table if exists actors;
+create table actors
+(
+	id SERIAL PRIMARY KEY,
+    firstname VARCHAR(100) NOT NULL,
+    lastname VARCHAR(100) NOT NULL,
+    birth DATE NOT NULL, 
+    country VARCHAR(100) NOT NULL,
+    city VARCHAR(100) NOT NULL,
+    
+    INDEX acters_fio (firstname, lastname)
+);
+
+drop table if exists movies_actors;
+create table movies_actors
+(
+	movies_id BIGINT UNSIGNED NOT NULL,
+    actors_id BIGINT UNSIGNED NOT NULL,
+    
+    PRIMARY KEY (movies_id, actors_id),
+    FOREIGN KEY (movies_id) REFERENCES movies(id),
+    FOREIGN KEY (actors_id) REFERENCES actors(id)
+);
+
 drop table if exists images;
 create table images
 (
@@ -70,19 +95,6 @@ create table ratings
 	rating INT UNSIGNED NOT NULL,
     
     INDEX ratings_rate_idx (rating)
-);
-
-drop table if exists actors;
-create table actors
-(
-	id SERIAL PRIMARY KEY,
-    firstname VARCHAR(100) NOT NULL,
-    lastname VARCHAR(100) NOT NULL,
-    birth DATE NOT NULL, 
-    country VARCHAR(100) NOT NULL,
-    city VARCHAR(100) NOT NULL,
-    
-    INDEX acters_fio (firstname, lastname)
 );
 
 drop table if exists actors_photos;
